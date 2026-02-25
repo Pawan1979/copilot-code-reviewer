@@ -36,8 +36,8 @@ Designed for **developers who want instant, actionable code feedback** without w
 copilot-code-reviewer/
 └── agent.py              # Core agent: CodeReviewAgent class + CLI
 └── test_agent.py         # pytest test suite (10+ tests)
-├── copilot-instructions/ # GitHub Copilot repo instructions
-└── workflows/ci.yml      # CI pipeline (Python 3.10/3.11/3.12)
+├── instructions.md # GitHub Copilot repo instructions
+└── ci.yml      # CI pipeline (Python 3.10/3.11/3.12)
 ├── .env.example              # Credential template
 ├── requirements.txt
 └── README.md
@@ -96,7 +96,7 @@ python agent.py --file path/to/your/code.py
 python agent.py --code "def divide(a,b): return a/b"
 
 # Save review to JSON (great for CI pipelines)
-python src/agent.py --file app.py --output review.json
+python agent.py --file app.py --output review.json
 ```
 
 ---
