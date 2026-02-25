@@ -34,13 +34,10 @@ Designed for **developers who want instant, actionable code feedback** without w
 
 ```
 copilot-code-reviewer/
-├── src/
-│   └── agent.py              # Core agent: CodeReviewAgent class + CLI
-├── tests/
-│   └── test_agent.py         # pytest test suite (10+ tests)
-├── .github/
-│   ├── copilot-instructions/ # GitHub Copilot repo instructions
-│   └── workflows/ci.yml      # CI pipeline (Python 3.10/3.11/3.12)
+└── agent.py              # Core agent: CodeReviewAgent class + CLI
+└── test_agent.py         # pytest test suite (10+ tests)
+├── copilot-instructions/ # GitHub Copilot repo instructions
+└── workflows/ci.yml      # CI pipeline (Python 3.10/3.11/3.12)
 ├── .env.example              # Credential template
 ├── requirements.txt
 └── README.md
@@ -90,13 +87,13 @@ cp .env.example .env
 ### 4. Run the agent
 ```bash
 # Interactive chat mode
-python src/agent.py
+python agent.py
 
 # Review a specific file
-python src/agent.py --file path/to/your/code.py
+python agent.py --file path/to/your/code.py
 
 # Review an inline snippet
-python src/agent.py --code "def divide(a,b): return a/b"
+python agent.py --code "def divide(a,b): return a/b"
 
 # Save review to JSON (great for CI pipelines)
 python src/agent.py --file app.py --output review.json
@@ -150,7 +147,7 @@ user input into the string — a classic SQL injection vulnerability...
 
 ```bash
 pip install pytest pytest-cov
-pytest tests/ -v --cov=src
+pytest  -v --cov=src
 ```
 
 ---
@@ -164,7 +161,7 @@ Use CodeReview Agent in your GitHub Actions pipeline:
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   run: |
-    python src/agent.py --file src/my_module.py --output review.json
+    python agent.py --file src/my_module.py --output review.json
     cat review.json
 ```
 
