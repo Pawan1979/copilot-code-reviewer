@@ -1,6 +1,6 @@
 """
-CodeReview Agent - GitHub Copilot Chat-powered Code Review Assistant
-Microsoft Agents League 2026 - Creative Apps Track (GitHub Copilot SDK)
+CodeReview Agent - OpenAI-powered Code Review Assistant
+Microsoft Agents League 2026 - Creative Apps Track
 """
 
 import os
@@ -36,7 +36,7 @@ Always be concise, constructive, and beginner-friendly.
 
 WELCOME_BANNER = """
 ╔══════════════════════════════════════════════════════════╗
-║        🤖  CodeReview Agent  |  Powered by GitHub Copilot       ║
+║        🤖  CodeReview Agent  |  Powered by Github Copilot       ║
 ║          Microsoft Agents League 2026 Submission           ║
 ╚══════════════════════════════════════════════════════════╝
 Commands:
@@ -55,26 +55,25 @@ Type your message or a command to get started.
 # ─────────────────────────────────────────────
 def build_client():
     """
-    Build the OpenAI-compatible client.
+    Build the OpenAI client.
     Priority:
-      1. GitHub Copilot (via GitHub token – preferred for the challenge)
+      1. OpenAI (via OpenAI API key)
 
     """
-    github_token = os.getenv("GITHUB_TOKEN")
-    if github_token:
-        # GitHub Copilot chat completions endpoint
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    if openai_api_key:
+        # OpenAI chat completions endpoint
         client = OpenAI(
-            base_url="https://models.inference.ai.azure.com",
-            api_key=github_token,
+            api_key=openai_api_key,
         )
-        model = os.getenv("COPILOT_MODEL", "gpt-4o")
-        print(f"✅ Connected via GitHub Copilot (model: {model})\n")
+        model = os.getenv("OPENAI_MODEL", "gpt-4")
+        print(f"✅ Connected via OpenAI (model: {model})\n")
         return client, model
 
  
 
     print("❌ No API credentials found.")
-    print("   Set GITHUB_TOKEN (recommended), AZURE_OPENAI_ENDPOINT, or OPENAI_API_KEY.")
+    print("   Set OPENAI_API_KEY environment variable.")
     sys.exit(1)
 
 
@@ -184,7 +183,7 @@ class CodeReviewAgent:
 # ─────────────────────────────────────────────
 def main():
     parser = argparse.ArgumentParser(
-        description="CodeReview Agent – GitHub Copilot-powered code reviewer"
+        description="CodeReview Agent – OpenAI-powered code reviewer"
     )
     parser.add_argument("--file", "-f", help="Path to a file to review (single-shot)")
     parser.add_argument("--code", "-c", help="Code snippet to review (single-shot)")
